@@ -62,11 +62,7 @@ public class PieceWorkerEmployee {
     }
     
     public double computeSalary(){
-        if (totalPiecesFinished < 100){
-            return totalPiecesFinished * ratePerPiece;
-        } else {
-            return (totalPiecesFinished * ratePerPiece) + (totalPiecesFinished / 100) * 10;
-        }
+        return (totalPiecesFinished * ratePerPiece) + (totalPiecesFinished / 100) * 10;
     }
 
     @Override

@@ -64,10 +64,9 @@ public class HourlyEmployee {
     public double computeSalary(){
         if (this.totalHoursWorked < 40){
             return this.ratePerHour*this.totalHoursWorked;
-        } else if (this.totalHoursWorked >= 40){
+        } else {
             return (this.ratePerHour*40) + ((this.ratePerHour*1.5)*(this.totalHoursWorked-40));
         }
-        return 0;
     }
 
     @Override
@@ -81,7 +80,7 @@ public class HourlyEmployee {
     }
     
     public void displayHourlyEmployee(){
-        System.out.println(this.toString());
+        System.out.println(this);
     }
     
 }
