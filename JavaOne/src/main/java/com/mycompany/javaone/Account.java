@@ -12,8 +12,8 @@ package com.mycompany.javaone;
 
 
 public class Account {
-    private double currBal = 0;
-    private double availBal = 0;
+    private double currBal;
+    private double availBal;
     private String accName;
     private int accNum;
     
