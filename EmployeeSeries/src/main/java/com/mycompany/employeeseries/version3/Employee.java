@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.employeeseries.version3;
-
 /**
  *
  * @author User
@@ -11,17 +10,27 @@ package com.mycompany.employeeseries.version3;
 public class Employee {
     public EmpName name;
     public Date dateHired;
-    public Date DOB;
-    public int empID;
-    
+    public Date dob;
+    public int id;
+
     public Employee() {
     }
 
-    public Employee(EmpName name, Date dateHired, Date DOB, int empID) {
-        this.name = new EmpName(name.getlName(), name.getfName(), name.getmName());
+    public Employee(EmpName name, int id) {
+        this.name = new EmpName(name.getfName(), name.getlName(), name.getmName());
+        this.id = id;
+    }
+    
+    public Employee(EmpName name, Date dateHired, Date dob) {
+        this.name = new EmpName(name.getfName(), name.getlName(), name.getmName());
         this.dateHired = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
-        this.DOB = new Date(DOB.getDay(), DOB.getMonth(), DOB.getYear());
-        this.empID = empID;
+        this.dob = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
+    }
+
+    public Employee(EmpName name, Date dateHired, Date dob, int id) {
+        this(name, id);
+        this.dateHired = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
+        this.dob = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
     }
 
     public EmpName getName() {
@@ -29,7 +38,7 @@ public class Employee {
     }
 
     public void setName(EmpName name) {
-        this.name = new EmpName(name.getlName(), name.getfName(), name.getmName());
+        this.name = name;
     }
 
     public Date getDateHired() {
@@ -37,37 +46,37 @@ public class Employee {
     }
 
     public void setDateHired(Date dateHired) {
-        this.dateHired = new Date(dateHired.getMonth(), dateHired.getDay(), dateHired.getYear());
+        this.dateHired = dateHired;
     }
 
-    public Date getDOB() {
-        return DOB;
+    public Date getDob() {
+        return dob;
     }
 
-    public void setDOB(Date DOB) {
-        this.DOB = new Date(DOB.getMonth(), DOB.getDay(), DOB.getYear());
+    public void setDob(Date dob) {
+        this.dob = dob;
     }
 
-    public int getEmpID() {
-        return empID;
+    public int getId() {
+        return id;
     }
 
-    public void setEmpID(int empID) {
-        this.empID = empID;
+    public void setId(int id) {
+        this.id = id;
     }
-
+    
+    public void display(){
+        System.out.println(this);
+    }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("\nEmployee Name: ").append(name.lName).append(", ").append(name.fName).append(" ").append(name.mName);
-        sb.append("\nEmployee ID: ").append(empID);
-        sb.append("\nDate Hired: ").append(dateHired.month).append("/").append(dateHired.day).append("/").append(dateHired.year);
-        sb.append("\nDate of Birth: ").append(DOB.month).append("/").append(DOB.day).append("/").append(DOB.year);
+        sb.append("\nEmployee Name: ").append(name.lName).append(", ").append(name.fName).append(", ").append("name.mName");
+        sb.append("\nEmployee ID: ").append(id);
+        sb.append("\nDate Hired: ").append(dateHired.month).append("/").append(dateHired.day).append("/").append(dateHired.year);    
+        sb.append("\nDate of Birth: ").append(dob.month).append("/").append(dob.day).append("/").append(dob.year); 
         return sb.toString();
     }
     
-    public void displayEmployee(){
-        System.out.println(this);
-    }
 }

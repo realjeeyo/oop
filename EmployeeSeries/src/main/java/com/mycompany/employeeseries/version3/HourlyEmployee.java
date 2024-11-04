@@ -15,9 +15,63 @@ public class HourlyEmployee extends Employee{
     public HourlyEmployee() {
     }
 
-    public HourlyEmployee(EmpName name, Date dateHired, Date DOB, int empID) {
-        super(name, dateHired, DOB, empID);
+    public HourlyEmployee(EmpName name, int empID){
+        super(name, empID);
     }
     
+    public HourlyEmployee(EmpName name, Date startDate, Date endDate, int empID){
+        super(name, startDate, endDate, empID);
+    }
+
+    public HourlyEmployee(float totalHoursWorked, double ratePerHour) {
+        this.totalHoursWorked = totalHoursWorked;
+        this.ratePerHour = ratePerHour;
+    }
+
+    public HourlyEmployee(float totalHoursWorked, double ratePerHour, EmpName name, Date dateHired, Date dob, int id) {
+        super(name, dateHired, dob, id);
+        this.totalHoursWorked = totalHoursWorked;
+        this.ratePerHour = ratePerHour;
+    }
+
+    public float getTotalHoursWorked() {
+        return totalHoursWorked;
+    }
+
+    public void setTotalHoursWorked(float totalHoursWorked) {
+        this.totalHoursWorked = totalHoursWorked;
+    }
+
+    public double getRatePerHour() {
+        return ratePerHour;
+    }
+
+    public void setRatePerHour(double ratePerHour) {
+        this.ratePerHour = ratePerHour;
+    }
+    
+    public double computeSalary() {
+        if (this.totalHoursWorked <= 40) {
+            return this.ratePerHour * this.totalHoursWorked;
+        } else {
+            return 40 * this.ratePerHour + ((this.totalHoursWorked - 40) * this.ratePerHour * 1.5);
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Hourly Employee{");
+        sb.append("Total Hours Worked =").append(totalHoursWorked);
+        sb.append(", ratePerHour = ").append(ratePerHour);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+    @Override
+    public void display(){
+        super.display();
+        System.out.printf("Salary:  %f\n",computeSalary());
+    }
     
 }

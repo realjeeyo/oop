@@ -17,41 +17,50 @@ public class EmpName {
     }
 
     public EmpName(String fName, String lName, String mName) {
-        this.lName = lName;
         this.fName = fName;
+        this.lName = lName;
         this.mName = mName;
     }
-
-    public EmpName(String fName, String lName) {
-        this.fName = fName;
-        this.lName = lName;
-    }
-
+    
     public String getfName() {
         return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
     }
 
     public String getlName() {
         return lName;
     }
 
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
     public String getmName() {
         return mName;
     }
 
-    public void setmName(String mName) {
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
+    public void setlName(String lName) {
+        this.lName = lName;
+    }
+
+    public void setMI(String mName) {
         this.mName = mName;
     }
     
     public void display(){
-        System.out.printf("%s, %s %s.", lName, fName, mName);
+        System.out.print(lName + ", " + fName);
+        if(this.mName.equals("")){
+            System.out.print(", " + mName);
+        }
+        System.out.print(" - ");
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Name: ");
+        sb.append("\nFirst Name: ").append(fName);
+        sb.append("\nLast Name: ").append(lName);
+        sb.append("\nMI: ").append(mName);     
+        return sb.toString();
     }
 }
