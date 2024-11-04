@@ -11,143 +11,77 @@ import java.util.ArrayList;
  * @author User
  */
 public class EmployeeRoster {
-    private int count;
-    private final int max;
-    ArrayList<Employee> myList = new ArrayList;
-    Employee[] empList;
+    ArrayList<Employee> empList = new ArrayList();
 
-    public EmployeeRoster(int max) {
-        this.count = 0;
-        this.max = max;
-        empList = new Employee[max];
-    }
-    
     public EmployeeRoster() {
-        this.count = 0;
-        this.max = 50;
-        empList = new Employee[max];
     }
-    
+
     public boolean addEmployee(Employee emp){
-        if(count < max){
-            empList[count++] = emp;
-            return true;
-        } 
-        return false;
+        return empList.add(emp);
     }
     
     public Employee removeEmployee(int id) {
-        Employee temp = null;
-
-        if (count > 0) {
-            int i;
-            for (i = 0; i < count; i++) {
-                if (empList[i].id == id) {
-                    temp = empList[i];
-                    break;
-                }
-            }
-
-            if (temp != null) {
-                for (int j = i; j < count - 1; j++) {
-                    empList[j] = empList[j + 1];
-                }
-                empList[--count] = null; 
+        for (int i=0; i<empList.size();++i){
+            if (empList.get(i).getId() == id){
+                return empList.remove(i);
             }
         }
-        return temp;
+        return null;
     }
         
     public int countHE(){
-        int total = 0;
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof HourlyEmployee){
-                total++;
-            }
-        }
-        return total;
+        return (int) empList.stream().filter(emp -> emp instanceof HourlyEmployee).count();
     }
-    
+        
     public int countCE(){
-        int total = 0;
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof CommissionEmployee && !(empList[i] instanceof BasedPlusCommissionEmployee)){
-                total++;
-            }
-        }
-        return total;
+        return (int) empList.stream().filter(emp -> emp instanceof CommissionEmployee && !(emp instanceof BasedPlusCommissionEmployee)).count();
     }
     
     public int countBPCE(){
-        int total = 0;
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof BasedPlusCommissionEmployee){
-                total++;
-            }
-        }
-        return total;
+        return (int) empList.stream().filter(emp -> emp instanceof BasedPlusCommissionEmployee).count();
     }
     
     public int countPWE(){
-        int total = 0;
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof PieceWorkerEmployee){
-                total++;
-            }
-        }
-        return total;
+        return (int) empList.stream().filter(emp -> emp instanceof PieceWorkerEmployee).count();
     }
     
     public void displayHE(){
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof HourlyEmployee){
-                ((HourlyEmployee) empList[i]).display();
-            }
-        }
+        empList.stream().filter(emp -> emp instanceof HourlyEmployee).forEach(emp -> ((HourlyEmployee) emp).display());
     }
     
     public void displayCE(){
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof CommissionEmployee && !(empList[i] instanceof BasedPlusCommissionEmployee)){
-                ((CommissionEmployee) empList[i]).display();
-            }
-        }
+        empList.stream().filter(emp -> emp instanceof CommissionEmployee && !(emp instanceof BasedPlusCommissionEmployee)).forEach(emp -> ((CommissionEmployee) emp).display());
     }
     
     public void displayBPCE(){
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof BasedPlusCommissionEmployee){
-                ((BasedPlusCommissionEmployee) empList[i]).display();
-            }
-        }
+        empList.stream().filter(emp -> emp instanceof BasedPlusCommissionEmployee).forEach(emp -> ((BasedPlusCommissionEmployee) emp).display());
     }
     
     public void displayPWE(){
-        for(int i = 0; i < count; ++i){
-            if(empList[i] instanceof PieceWorkerEmployee){
-                ((PieceWorkerEmployee) empList[i]).display();
-            }
-        }
+        empList.stream().filter(emp -> emp instanceof PieceWorkerEmployee).forEach(emp -> ((PieceWorkerEmployee) emp).display());
     }
     
     public void displayAllEmployee(){
         System.out.printf("%-10s|%-20s|%-15s|%-15s|%-10s|%-30s|\n", "ID", "Name", "Date Of Birth", "Date Hired", "Salary", "Employee Type");
-        for(int i = 0; i < count; ++i){
-            System.out.printf("%-10s|", empList[i].getId());
-            System.out.printf("%-20s|", empList[i].getName());
-            System.out.printf("%-15s|", empList[i].getDob());
-            System.out.printf("%-15s|", empList[i].getDateHired());
-            if(empList[i] instanceof BasedPlusCommissionEmployee){
-                System.out.printf("%-,10.2f|", ((BasedPlusCommissionEmployee) empList[i]).computeSalary());
-            } else if(empList[i] instanceof CommissionEmployee){
-                System.out.printf("%-,10.2f|", ((CommissionEmployee) empList[i]).computeSalary());
-            } else if(empList[i] instanceof HourlyEmployee){
-                System.out.printf("%-,10.2f|", ((HourlyEmployee) empList[i]).computeSalary());
-            } else if(empList[i] instanceof PieceWorkerEmployee){
-                System.out.printf("%-,10.2f|", ((PieceWorkerEmployee) empList[i]).computeSalary());
-            }
-            System.out.printf("%-30s|\n", empList[i].getClass().getSimpleName());
+        empList.forEach(emp -> {
+        System.out.printf("%-10s|", emp.getId());
+        System.out.printf("%-20s|", emp.getName());
+        System.out.printf("%-15s|", emp.getDob());
+        System.out.printf("%-15s|", emp.getDateHired());
+
+        if (emp instanceof BasedPlusCommissionEmployee) {
+            System.out.printf("%-,10.2f|", ((BasedPlusCommissionEmployee) emp).computeSalary());
+        } else if (emp instanceof CommissionEmployee) {
+            System.out.printf("%-,10.2f|", ((CommissionEmployee) emp).computeSalary());
+        } else if (emp instanceof HourlyEmployee) {
+            System.out.printf("%-,10.2f|", ((HourlyEmployee) emp).computeSalary());
+        } else if (emp instanceof PieceWorkerEmployee) {
+            System.out.printf("%-,10.2f|", ((PieceWorkerEmployee) emp).computeSalary());
         }
+
+        System.out.printf("%-30s|\n", emp.getClass().getSimpleName());
+        });
+
         System.out.println();
     }
 }
