@@ -24,13 +24,13 @@ public class Employee {
     public Employee(EmpName name, Date dateHired, Date dob) {
         this.name = new EmpName(name.getfName(), name.getlName(), name.getmName());
         this.dateHired = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
-        this.dob = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
+        this.dob = new Date(dob.getDay(), dob.getMonth(), dob.getYear());
     }
 
     public Employee(EmpName name, Date dateHired, Date dob, int id) {
         this(name, id);
         this.dateHired = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
-        this.dob = new Date(dateHired.getDay(), dateHired.getMonth(), dateHired.getYear());
+        this.dob = new Date(dob.getDay(), dob.getMonth(), dob.getYear());
     }
 
     public EmpName getName() {

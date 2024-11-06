@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.employeeseries.version4;
+package com.mycompany.employeeseries.version6;
+
 /**
  *
  * @author User
  */
-public class Employee {
+public abstract class Employee {
     public EmpName name;
     public Date dateHired;
     public Date dob;
@@ -68,6 +69,8 @@ public class Employee {
     public void display(){
         System.out.println(this);
     }
+    
+    public abstract double computeSalary();
 
     @Override
     public String toString() {
